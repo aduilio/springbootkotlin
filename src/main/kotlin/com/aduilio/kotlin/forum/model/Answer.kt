@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 data class Answer(
         val id: Long? = null,
         val message: String,
-        val date: LocalDateTime,
+        val date: LocalDateTime = LocalDateTime.now(),
         val author: Student,
         val topic: Topic,
         val solutionAccepted: Boolean

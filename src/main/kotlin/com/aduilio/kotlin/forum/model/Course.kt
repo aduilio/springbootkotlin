@@ -5,6 +5,6 @@ package com.aduilio.kotlin.forum.model
  */
 data class Course(
         val id: Long? = null,
-        val name: String,
-        val category: String
+        val name: String = "",
+        val category: String = ""
 )

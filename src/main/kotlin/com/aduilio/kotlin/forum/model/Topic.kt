@@ -6,9 +6,9 @@ import java.time.LocalDateTime
  * Represents a Topic.
  */
 data class Topic(
-        val id: Long? = null,
-        val title: String,
-        val message: String,
+        var id: Long? = null,
+        var title: String,
+        var message: String,
         val date: LocalDateTime = LocalDateTime.now(),
         val course: Course,
         val author: Student,
