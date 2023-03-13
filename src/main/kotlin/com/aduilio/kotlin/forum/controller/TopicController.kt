@@ -4,58 +4,51 @@ import com.aduilio.kotlin.forum.dto.CreateTopicDto
 import com.aduilio.kotlin.forum.dto.ListTopicDto
 import com.aduilio.kotlin.forum.dto.ReadTopicDto
 import com.aduilio.kotlin.forum.dto.UpdateTopicDto
-import com.aduilio.kotlin.forum.mapper.TopicMapper
-import com.aduilio.kotlin.forum.model.Topic
 import com.aduilio.kotlin.forum.service.TopicService
+import jakarta.transaction.Transactional
 import jakarta.validation.Valid
-import org.apache.coyote.Response
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
-import java.net.URI
-import java.util.stream.Collectors
 
 /**
  * Receives the request for the resource /topics.
  */
 @RestController
 @RequestMapping("/topics")
-class TopicController(private val topicService: TopicService,
-                      private val topicMapper: TopicMapper) {
+class TopicController(private val topicService: TopicService) {
 
     @PostMapping
-    fun create(@RequestBody @Valid topic: CreateTopicDto,
+    @Transactional
+    fun create(@RequestBody @Valid createTopicDto: CreateTopicDto,
                componentsBuilder: UriComponentsBuilder): ResponseEntity<ReadTopicDto> {
-        val result = topicService.create(topic)
-        val response = topicMapper.mapReadTopicDtoFrom(result)
-        val uri = componentsBuilder.path("/topics/${result.id}").build().toUri()
-        return ResponseEntity.created(uri).body(response)
+        val topic = topicService.create(createTopicDto)
+        val uri = componentsBuilder.path("/topics/${topic.id}").build().toUri()
+
+        return ResponseEntity.created(uri).body(topic)
     }
 
     @PatchMapping("/{id}")
+    @Transactional
     fun update(@PathVariable id: Long, @RequestBody @Valid updateTopicDto: UpdateTopicDto): ResponseEntity<ReadTopicDto> {
-        val topic = topicService.read(id)
-        topicMapper.mapTopicFrom(updateTopicDto, topic!!)
-        topicService.update(topic)
+        val topic = topicService.update(id, updateTopicDto)
 
-        return ResponseEntity.ok(topicMapper.mapReadTopicDtoFrom(topic))
+        return ResponseEntity.ok(topic)
     }
 
     @GetMapping
     fun list(): ResponseEntity<List<ListTopicDto>> {
         val topics = topicService.list()
-        val response = topics.stream()
-                .map { topic -> topicMapper.mapListTopicDtoFrom(topic) }
-                .collect(Collectors.toList())
-        return ResponseEntity.ok(response)
+
+        return ResponseEntity.ok(topics)
     }
 
     @GetMapping("/{id}")
     fun read(@PathVariable id: Long): ResponseEntity<ReadTopicDto> {
-        val result = topicService.read(id)
-        val response = topicMapper.mapReadTopicDtoFrom(result!!)
-        return ResponseEntity.ok(response)
+        val topic = topicService.read(id)
+
+        return ResponseEntity.ok(topic)
     }
 
     @DeleteMapping("/{id}")
