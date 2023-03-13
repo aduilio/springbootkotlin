@@ -31,6 +31,7 @@ class TopicService(private val topicRepository: TopicRepository,
     fun create(createTopicDto: CreateTopicDto): ReadTopicDto {
         val topic = topicMapper.mapTopicFrom(createTopicDto)
         val result = topicRepository.save(topic)
+
         return topicMapper.mapReadTopicDtoFrom(result)
     }
 
@@ -45,6 +46,7 @@ class TopicService(private val topicRepository: TopicRepository,
     fun update(id: Long, updateTopicDto: UpdateTopicDto): ReadTopicDto {
         val topic = readTopic(id)
         topicMapper.mapTopicFrom(updateTopicDto, topic)
+
         return topicMapper.mapReadTopicDtoFrom(topic)
     }
 

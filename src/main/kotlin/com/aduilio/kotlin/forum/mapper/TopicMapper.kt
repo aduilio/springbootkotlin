@@ -53,12 +53,8 @@ class TopicMapper {
                 id = topic.id!!,
                 title = topic.title,
                 message = topic.message,
-                course = ReadTopicDtoCourse(
-                        id = topic.course.id!!
-                ),
-                author = ReadTopicDtoAuthor(
-                        id = topic.author.id!!
-                )
+                course = mapReadTopicDtoCourseFrom(topic.course),
+                author = mapReadTopicDtoAuthor(topic.author)
         )
     }
 
@@ -73,5 +69,13 @@ class TopicMapper {
                 id = topic.id!!,
                 title = topic.title
         )
+    }
+
+    private fun mapReadTopicDtoCourseFrom(course: Course): ReadTopicDtoCourse {
+        return ReadTopicDtoCourse(course.id!!, course.name, course.category)
+    }
+
+    private fun mapReadTopicDtoAuthor(author: Student): ReadTopicDtoAuthor {
+        return ReadTopicDtoAuthor(author.id!!, author.name, author.email)
     }
 }

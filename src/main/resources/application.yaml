@@ -1,3 +1,7 @@
 server:
   error:
     include-stacktrace: never
+
+spring:
+  jpa:
+    defer-datasource-initialization: true
