@@ -11,7 +11,6 @@ import com.aduilio.kotlin.forum.repository.TopicRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import java.util.stream.Collectors
 
 /**
  * Provides services related to topics.
