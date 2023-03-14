@@ -8,6 +8,8 @@ import com.aduilio.kotlin.forum.exception.NotFoundException
 import com.aduilio.kotlin.forum.mapper.TopicMapper
 import com.aduilio.kotlin.forum.model.Topic
 import com.aduilio.kotlin.forum.repository.TopicRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.util.stream.Collectors
 
@@ -55,16 +57,14 @@ class TopicService(private val topicRepository: TopicRepository,
      *
      * @return List of ListTopicDto
      */
-    fun list(courseName: String?): List<ListTopicDto> {
+    fun list(courseName: String?, pageable: Pageable): Page<ListTopicDto> {
         val topics = if (courseName != null) {
-            topicRepository.findByCourseName(courseName)
+            topicRepository.findByCourseName(courseName, pageable)
         } else {
-            topicRepository.findAll()
+            topicRepository.findAll(pageable)
         }
 
-        return topics.stream()
-                .map { topic -> topicMapper.mapListTopicDtoFrom(topic) }
-                .collect(Collectors.toList())
+        return topics.map { topic -> topicMapper.mapListTopicDtoFrom(topic) }
     }
 
     /**
