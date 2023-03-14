@@ -55,8 +55,14 @@ class TopicService(private val topicRepository: TopicRepository,
      *
      * @return List of ListTopicDto
      */
-    fun list(): List<ListTopicDto> {
-        return topicRepository.findAll().stream()
+    fun list(courseName: String?): List<ListTopicDto> {
+        val topics = if (courseName != null) {
+            topicRepository.findByCourseName(courseName)
+        } else {
+            topicRepository.findAll()
+        }
+
+        return topics.stream()
                 .map { topic -> topicMapper.mapListTopicDtoFrom(topic) }
                 .collect(Collectors.toList())
     }

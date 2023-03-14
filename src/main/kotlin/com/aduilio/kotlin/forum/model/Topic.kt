@@ -13,15 +13,15 @@ data class Topic(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null,
 
-        var title: String,
-        var message: String,
+        var title: String = "",
+        var message: String = "",
         val date: LocalDateTime = LocalDateTime.now(),
 
         @ManyToOne
-        val course: Course,
+        var course: Course = Course(),
 
         @ManyToOne
-        val author: Student,
+        var author: Student = Student(),
 
         @Enumerated(value = EnumType.STRING)
         val status: TopicStatus = TopicStatus.NEW,
