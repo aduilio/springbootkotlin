@@ -1,4 +1,4 @@
-package com.aduilio.kotlin.forum.model
+package com.aduilio.kotlin.forum.entity
 
 import jakarta.persistence.*
 import java.time.LocalDateTime
@@ -7,6 +7,7 @@ import java.time.LocalDateTime
  * Represents a topic.
  */
 @Entity
+@Table(name = "topics")
 data class Topic(
 
         @Id
@@ -21,7 +22,7 @@ data class Topic(
         var course: Course = Course(),
 
         @ManyToOne
-        var author: Student = Student(),
+        var author: User = User(),
 
         @Enumerated(value = EnumType.STRING)
         val status: TopicStatus = TopicStatus.NEW,

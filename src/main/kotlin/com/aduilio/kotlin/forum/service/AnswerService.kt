@@ -1,9 +1,9 @@
 package com.aduilio.kotlin.forum.service
 
-import com.aduilio.kotlin.forum.model.Answer
-import com.aduilio.kotlin.forum.model.Course
-import com.aduilio.kotlin.forum.model.Student
-import com.aduilio.kotlin.forum.model.Topic
+import com.aduilio.kotlin.forum.entity.Answer
+import com.aduilio.kotlin.forum.entity.Course
+import com.aduilio.kotlin.forum.entity.User
+import com.aduilio.kotlin.forum.entity.Topic
 import org.springframework.stereotype.Service
 import java.util.stream.Collectors
 
@@ -19,7 +19,7 @@ class AnswerService(private var answers: List<Answer>) {
                 name = "Course",
                 category = "Category"
         )
-        val author = Student(
+        val author = User(
                 id = 1,
                 name = "Student",
                 email = "st@email.com"

@@ -1,9 +1,9 @@
 package com.aduilio.kotlin.forum.mapper
 
 import com.aduilio.kotlin.forum.dto.*
-import com.aduilio.kotlin.forum.model.Course
-import com.aduilio.kotlin.forum.model.Student
-import com.aduilio.kotlin.forum.model.Topic
+import com.aduilio.kotlin.forum.entity.Course
+import com.aduilio.kotlin.forum.entity.User
+import com.aduilio.kotlin.forum.entity.Topic
 import org.springframework.stereotype.Component
 
 /**
@@ -25,7 +25,7 @@ class TopicMapper {
                 course = Course(
                         id = createTopicDto.course.id
                 ),
-                author = Student(
+                author = User(
                         id = createTopicDto.author.id
                 )
         )
@@ -75,7 +75,7 @@ class TopicMapper {
         return ReadTopicDtoCourse(course.id!!, course.name, course.category)
     }
 
-    private fun mapReadTopicDtoAuthor(author: Student): ReadTopicDtoAuthor {
+    private fun mapReadTopicDtoAuthor(author: User): ReadTopicDtoAuthor {
         return ReadTopicDtoAuthor(author.id!!, author.name, author.email)
     }
 }

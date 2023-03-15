@@ -1,6 +1,6 @@
 package com.aduilio.kotlin.forum.repository
 
-import com.aduilio.kotlin.forum.model.Topic
+import com.aduilio.kotlin.forum.entity.Topic
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository

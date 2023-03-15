@@ -6,7 +6,7 @@ import com.aduilio.kotlin.forum.dto.ReadTopicDto
 import com.aduilio.kotlin.forum.dto.UpdateTopicDto
 import com.aduilio.kotlin.forum.exception.NotFoundException
 import com.aduilio.kotlin.forum.mapper.TopicMapper
-import com.aduilio.kotlin.forum.model.Topic
+import com.aduilio.kotlin.forum.entity.Topic
 import com.aduilio.kotlin.forum.repository.TopicRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable

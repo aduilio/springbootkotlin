@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import java.lang.RuntimeException
 
 /**
- * To be thrown when an entity os not found.
+ * To be thrown when an entity was not found.
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
 class NotFoundException(message: String?) : RuntimeException(message) {
-
 
 }

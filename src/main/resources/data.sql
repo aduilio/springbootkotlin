@@ -1,2 +1,2 @@
-insert into student(id, name, email) values (1, 'John Doe', 'jd@mail.com');
-insert into course(id, name, category) values (1, 'Kotlin', 'Programming language')
+insert into users(id, name, email, password) values (1, 'John Doe', 'jd@mail.com', '$2a$12$H9fNgsPETG6q1mIz9XYE8u5KXrpsF4tC75m0SsJ4IZ59WH62xBS8S');
+insert into courses(id, name, category) values (1, 'Kotlin', 'Programming language')

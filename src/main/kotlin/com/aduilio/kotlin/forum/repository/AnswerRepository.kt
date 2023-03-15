@@ -1,6 +1,6 @@
 package com.aduilio.kotlin.forum.repository
 
-import com.aduilio.kotlin.forum.model.Answer
+import com.aduilio.kotlin.forum.entity.Answer
 import org.springframework.data.jpa.repository.JpaRepository
 
 /**

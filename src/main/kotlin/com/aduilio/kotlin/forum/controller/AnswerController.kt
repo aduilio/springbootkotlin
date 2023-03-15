@@ -1,6 +1,6 @@
 package com.aduilio.kotlin.forum.controller
 
-import com.aduilio.kotlin.forum.model.Answer
+import com.aduilio.kotlin.forum.entity.Answer
 import com.aduilio.kotlin.forum.service.AnswerService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
