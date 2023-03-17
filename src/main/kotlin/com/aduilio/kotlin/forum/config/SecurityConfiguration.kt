@@ -1,7 +1,9 @@
 package com.aduilio.kotlin.forum.config
 
+import com.aduilio.kotlin.forum.entity.UserRole
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -20,6 +22,11 @@ class SecurityConfiguration {
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         return http.authorizeHttpRequests()
+                .requestMatchers("/h2-console").permitAll()
+                .requestMatchers(HttpMethod.GET, "/topics").permitAll()
+                .requestMatchers(HttpMethod.POST, "/topics").hasAuthority(UserRole.STUDENT.toString())
+                .requestMatchers(HttpMethod.PATCH, "/topics").hasAuthority(UserRole.TEACHER.value)
+                .requestMatchers(HttpMethod.DELETE, "/topics").hasAuthority(UserRole.ADMIN.value)
                 .anyRequest()
                 .authenticated()
                 .and()
