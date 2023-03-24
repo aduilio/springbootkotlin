@@ -12,3 +12,6 @@ spring:
 logging:
   level:
     root: INFO
+
+jwt:
+  secret: c2VjcmV0X2tleV9qd3RfdG9rZW5fWWZyNTZEcmZ2a8uGN2diczdHSGdiOGhCQmo4aEhqMDk3Qk5rajdSZ0xxYkZ5NzVEdmNhMGhiZnZSZ2FIZDM0RHNhcGpucQ==
