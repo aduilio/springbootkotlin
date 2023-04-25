@@ -18,10 +18,25 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
+        <assertj-core.version>3.24.2</assertj-core.version>
         <java.version>17</java.version>
-        <kotlin.version>1.8.0</kotlin.version>
         <jjwt.version>0.11.5</jjwt.version>
+        <kotlin.version>1.8.0</kotlin.version>
+        <mockk-jvm.version>1.13.5</mockk-jvm.version>
+        <testcontainers-bom.version>1.18.0</testcontainers-bom.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -91,13 +106,18 @@
         <dependency>
             <groupId>io.mockk</groupId>
             <artifactId>mockk-jvm</artifactId>
-            <version>1.13.5</version>
+            <version>${mockk-jvm.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.24.2</version>
+            <version>${assertj-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
