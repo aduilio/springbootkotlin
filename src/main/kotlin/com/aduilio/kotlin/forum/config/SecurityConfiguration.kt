@@ -31,6 +31,8 @@ class SecurityConfiguration(private val configuration: AuthenticationConfigurati
         return http.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/h2-console").permitAll()
+                .requestMatchers(HttpMethod.GET, "/swagger-ui/*").permitAll()
+                .requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll()
                 //.requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .requestMatchers(HttpMethod.GET, "/topics").hasAnyAuthority(UserRole.STUDENT.value, UserRole.TEACHER.value, UserRole.ADMIN.value)
                 .requestMatchers(HttpMethod.POST, "/topics").hasAuthority(UserRole.STUDENT.value)
