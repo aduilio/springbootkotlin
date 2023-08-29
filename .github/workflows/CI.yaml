@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  in-docker-test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '17'
+      - name: Cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Execute
+        run: mvn -B test
