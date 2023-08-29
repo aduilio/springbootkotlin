@@ -1,27 +1,33 @@
 package com.aduilio.kotlin.forum.controller
 
-import com.aduilio.kotlin.forum.entity.Answer
+import com.aduilio.kotlin.forum.dto.CreateAnswerDto
+import com.aduilio.kotlin.forum.dto.ReadAnswerDto
 import com.aduilio.kotlin.forum.service.AnswerService
+import jakarta.transaction.Transactional
+import jakarta.validation.Valid
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.util.UriComponentsBuilder
 
 /**
- * Receives the request for the resource /topics.
+ * Receives the request for the resource /answers.
  */
 @RestController
-@RequestMapping("/topics/{topicId}/answers")
+@RequestMapping("/answers")
 class AnswerController(private var answerService: AnswerService) {
 
-    /**
-     * Returns all the answers for a topic.
-     *
-     * @param topicId the topic id
-     */
-    @GetMapping
-    fun list(@PathVariable topicId: Long): ResponseEntity<List<Answer>> {
-        return ResponseEntity.ok(answerService.list(topicId))
+    @PostMapping
+    @Transactional
+    @CacheEvict(value = ["answers"], allEntries = true)
+    fun create(@RequestBody @Valid createAnswerDto: CreateAnswerDto,
+               componentsBuilder: UriComponentsBuilder): ResponseEntity<ReadAnswerDto> {
+        val answer = answerService.create(createAnswerDto)
+        val uri = componentsBuilder.path("/answers/${answer.id}").build().toUri()
+
+        return ResponseEntity.created(uri).body(answer)
     }
 }
