@@ -39,6 +39,7 @@ class SecurityConfiguration(private val configuration: AuthenticationConfigurati
                 .requestMatchers(HttpMethod.PATCH, "/topics").hasAuthority(UserRole.TEACHER.value)
                 .requestMatchers(HttpMethod.DELETE, "/topics").hasAuthority(UserRole.ADMIN.value)
                 .requestMatchers(HttpMethod.POST, "/answers").hasAnyAuthority(UserRole.TEACHER.value, UserRole.ADMIN.value)
+                .requestMatchers("/reports/**").hasAuthority(UserRole.ADMIN.value)
                 .anyRequest()
                 .authenticated()
                 .and()

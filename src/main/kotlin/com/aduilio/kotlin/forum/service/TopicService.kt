@@ -4,9 +4,9 @@ import com.aduilio.kotlin.forum.dto.CreateTopicDto
 import com.aduilio.kotlin.forum.dto.ListTopicDto
 import com.aduilio.kotlin.forum.dto.ReadTopicDto
 import com.aduilio.kotlin.forum.dto.UpdateTopicDto
+import com.aduilio.kotlin.forum.entity.Topic
 import com.aduilio.kotlin.forum.exception.NotFoundException
 import com.aduilio.kotlin.forum.mapper.TopicMapper
-import com.aduilio.kotlin.forum.entity.Topic
 import com.aduilio.kotlin.forum.repository.TopicRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -88,6 +88,13 @@ class TopicService(private val topicRepository: TopicRepository,
     fun delete(id: Long) {
         topicRepository.deleteById(id)
     }
+
+    /**
+     * Generates the report data.
+     *
+     * @return List of TopicCategoryReport
+     */
+    fun report() = topicRepository.report()
 
     private fun readTopic(id: Long): Topic {
         return topicRepository.findById(id)
