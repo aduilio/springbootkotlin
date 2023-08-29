@@ -3,7 +3,7 @@ package com.aduilio.kotlin.forum.entity
 import jakarta.persistence.*
 
 /**
- * Represents an user.
+ * Represents a user.
  */
 @Entity
 @Table(name = "users")
